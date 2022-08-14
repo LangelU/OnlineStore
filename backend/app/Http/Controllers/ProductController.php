@@ -12,6 +12,7 @@ class ProductController extends Controller {
         $produtReference = $request->input("reference");
         $validateExistence = DB::table("products")->select("*")
         ->where('reference', '=', $produtReference)->get();
+        $picture = "000";
 
         if($validateExistence->isEmpty()){
             $newProduct = new Product;
@@ -21,18 +22,16 @@ class ProductController extends Controller {
             $newProduct->price          = $request->input("prod_price");
             $newProduct->iva            = $request->input("prod_iva");
             $newProduct->stock          = $request->input("prod_stock");
-            $newProduct->picture        = $request->input("prod_picture");
+            $newProduct->picture        = $picture;
             $newProduct->brand          = $request->input("prod_brand");
             $newProduct->model          = $request->input("prod_model");
             $newProduct->ID_category    = $request->input("prod_category");
             $newProduct->save();
 
-            return response ()->json (['status'=>'success','message'=>
-            'Product created successfully','response'=>['data'=>$newProduct]], 201);
+            return view('notifications.productCreated');
         }
         else{
-            return response ()->json (['status'=>'error','message'=>
-            'Could not create the product data'], 409);
+            return view('notifications.productNotCreated');
         }  
     }
 

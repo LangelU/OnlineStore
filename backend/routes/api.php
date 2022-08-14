@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::GET('/login', function () {return view('login.login');});
 Route::GET('/loginValidate', 'App\Http\Controllers\LoginController@login')->name('loginValidate');
 Route::GET('/home', 'App\Http\Controllers\ProductController@showAllProducts')->name('home');
+Route::get('/newProd', function () {return view('admin.newProdView');})->name('newProdView');
 
-
-Route::POST('/newProduct', 'App\Http\Controllers\ProductController@createProduct')->name('newProduct');
+Route::POST('/newProduct', 'App\Http\Controllers\ProductController@createProduct')->name('addProduct');
 Route::GET('/products', 'App\Http\Controllers\ProductController@showAllProducts')->name('products');
 Route::PUT('/updateProduct/{idProduct}', 'App\Http\Controllers\ProductController@updateProduct')->name('upProduct');
 Route::GET('/productDetails/{idProduct}', 'App\Http\Controllers\ProductController@productDetails')->name('productDetails');

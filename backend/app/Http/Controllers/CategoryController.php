@@ -62,7 +62,7 @@ class CategoryController extends Controller {
         $deleteCategory = DB::table('categories')
         ->where('ID', '=', $idCategory)->delete();
 
-        return response()->json(['success'=>'Categorie deleted successfully'], 200);
+        return view('notifications.categoryDeleted');
     }
     
 }

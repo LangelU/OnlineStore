@@ -94,10 +94,13 @@
                 @foreach ($categories as $category)
                     <tr>
                         <td>{{$category->category}}</td>
-                        <td><button>Editar</button></td>
-                        <td><button>Eliminar</button></td>
+                        <td><button id="editCategory">Editar</button></td>
+                        <form action="{{route('deleteCat', $category->ID)}}" method="POST">
+                            <td><button type="submit">Eliminar</button></td>   
+                        </form>
+                        
                     </tr>
-                @endforeach    
+                @endforeach 
                 </tbody>
             </table>
         </div>
@@ -108,23 +111,40 @@
     <!-- Modal -->
     <!-- The Modal -->
 <div id="myModal" class="modal">
-
-<!-- Modal content -->
-<div class="modal-content">
-  <div class="modal-header">
-    <span class="close">&times;</span>
-    <h2>Añadir categoría</h2>
-  </div>
-  <div class="modal-body">
-    <form action="{{route('newCategory')}}" method="POST">
-        @csrf
-        <input type="text" id="cat_name" name="cat_name" placeholder="Nombre de categoria...">
-        <button type="submit">Añadir</button>
-        <br>
-    </form>
-  </div>
+    <!-- Modal content -->
+    <div class="modal-content">
+    <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Añadir categoría</h2>
+    </div>
+    <div class="modal-body">
+        <form action="{{route('newCategory')}}" method="POST">
+            @csrf
+            <input type="text" id="cat_name" name="cat_name" placeholder="Nombre de categoria...">
+            <button type="submit">Añadir</button>
+            <br>
+        </form>
+    </div>
+    </div>
 </div>
 
+<div id="updCategory" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+    <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Editar categoría</h2>
+    </div>
+    <div class="modal-body">
+        <form action="{{route('upCategory', $category->ID)}}" method="POST">
+            @method('PUT')
+            @csrf
+            <input type="text" id="cat_name" name="cat_name" placeholder="Nombre de categoria...">
+            <button type="submit">Actualizar</button>
+            <br>
+        </form>
+    </div>
+    </div>
 </div>
 </body>
 </html>
@@ -169,4 +189,30 @@ toggle.addEventListener("click" , () =>{
 searchBtn.addEventListener("click" , () =>{
     sidebar.classList.remove("close");
 })
+
+//Edit category Modal
+var modal2 = document.getElementById("updCategory");
+
+// Get the button that opens the modal
+var btn2 = document.getElementById("editCategory");
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn2.onclick = function() {
+  modal2.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
 </script>

@@ -44,9 +44,16 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="{{route('categories')}}">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">Categorías</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{{route('newProdView')}}">
+                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                            <span class="text nav-text">Crear producto</span>
                         </a>
                     </li>
                 </ul>

@@ -1,0 +1,17 @@
+Caso de uso:
+Compra de productos por medio del carrito de compras:
+
+1.- El usuario inicia sesión
+2.- El usuario entra a la vista de productos.
+3.- El usuario selecciona el producto que desea, la cantidad a aquirir y la adiciona al carrito.
+4.- La tabla "shopping_carts" recibe la ID del usuario, ademas de  la ID, el precio unitario y el iva de cada uno de los productos.
+5.- Internamente se usa el valor del iva para calcular el precio total de cada producto, así como el correspondiente subtotal, y todo se almacena en "shopping_carts".
+6.- Una vez el usuario tiene todos los objetos a adquirir, y eligió su forma de pago, se procede a hacer la validación del carrito de compra:
+	- la función ValidateCart() recibirá la ID del usuario, y procederá a buscar en la tabla "shopping_carts" todos aquellos registros cuyo ID_user 			coincidan con el suministrado.
+	- Una vez localizados, se usa una función para generar el código de compra. Dado que este tiene que ser único, primero se valida que no exista  previamente en 		la base de datos.
+	- Una vez generado el código, la función ValidateCart() utiliza los datos de "shopping_carts" para crear registros nuevos en 2 tablas: sales y sales_history.
+	- En la tabla sales se crea un registro que contiene el código de venta, la ID del usuario y del producto, así como el subtotal. Se creará un registro por
+	cada objeto validado en el carrito de compras.
+	- En la tabla sales_histories se creará un registro que almacenará el código de venta, la ID del usuario, y la sumatoria de los subtotales de cada producto
+	adquirido, que representa el valor total de la compra.
+7.- Una vez validada la venta se eliminan de la tabla shopping_carts los registros utilizados, y con ello se da por efectuada la compra.
